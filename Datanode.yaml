@@ -1,0 +1,19 @@
+- hosts: Datanode
+  tasks:
+  - name: "Creating Directory in Datanode"
+    file:
+       path: "/Datanode"
+       state: directory
+
+  - name: "Configuring Datanode hdfs-site"
+    copy:
+       src: "./Datanode_hdfs-site.xml"
+       dest: "/etc/hadoop/hdfs-site.xml"
+
+  - name: "Configuring Datanode core-site.xml"
+    copy:
+       src: "./Datanode_core-site.xml"
+       dest: "/etc/hadoop/core-site.xml"
+
+  - name: "Starting Datanode"
+    shell: "hadoop-daemon.sh start datanode"

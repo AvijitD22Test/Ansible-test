@@ -1,0 +1,23 @@
+- hosts: Namenode
+
+  tasks:
+  - name: "Creating Directory in Namenode"
+    file:
+       path: "/Namenode"
+       state: directory
+
+  - name: "Configuring Namenode hdfs-site"
+    copy:
+       src: "./Namenode_hdfs-site.xml"
+       dest: "/etc/hadoop/hdfs-site.xml"
+
+  - name: "Configuring Namenode core-site.xml"
+    copy:
+      src: "./Namenode_core-site.xml"
+      dest: "/etc/hadoop/core-site.xml"
+
+  - name: "Formatting Namenode"
+    shell: "hadoop namenode -format -force"
+
+  - name: "Starting Namenode"
+    shell: "hadoop-daemon.sh start namenode"
